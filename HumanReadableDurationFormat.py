@@ -1,9 +1,18 @@
 # https://www.codewars.com/kata/52742f58faf5485cae000b9a/train/python
 
 
-def format_duration(seconds):
-    time = 0
-    return time
+def format_duration(sec):
+    seconds = sec % 60
+    minutes = (sec // 60) % 60
+    hours = (sec // 3600) % 24
+    days = (sec // 86400) % 365
+    years = (sec // 31104000)
+    s = lambda x: "s" if x > 1 else ""
+    return ''.join((f'{years} year{s(years)}, ' if years > 0 else "")
+                   + (f'{days} day{s(days)}, ' if days > 0 else "")
+                   + (f'{hours} hour{s(hours)}, ' if hours > 0 else "")
+                   + (f'{minutes} minute{s(minutes)} and ' if minutes > 0 else "")
+                   + (f'{seconds} second{s(seconds)}' if seconds > 0 else "" ))
 
 
 
@@ -11,11 +20,9 @@ print(format_duration(1))  # "1 second"
 print(format_duration(62))  # "1 minute and 2 seconds"
 print(format_duration(120))  # "2 minutes"
 print(format_duration(3600))  # "1 hour"
-print(format_duration(3662))  # "1 hour, 1 minute and 2 seconds"
+print(format_duration(3662))  # "1 hour, 1 minute and 2 seconds" 3662
 print(format_duration(3662*1000))  # "1 hour, 1 minute and 2 seconds"
-
-
-
+print(format_duration(3600*24*366*366))  # "372 years, 1 day, 0 hour, 0 minute and 0 second"
 
 
 
