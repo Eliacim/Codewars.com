@@ -2,18 +2,33 @@
 
 
 def format_duration(sec):
+    if sec == 0: return "now"
     seconds = sec % 60
     minutes = (sec // 60) % 60
     hours = (sec // 3600) % 24
     days = (sec // 86400) % 365
     years = (sec // 31104000)
+    timeall = []
+    result = ""
     s = lambda x: "s" if x > 1 else ""
-    return ''.join((f'{years} year{s(years)}, ' if years > 0 else "")
-                   + (f'{days} day{s(days)}, ' if days > 0 else "")
-                   + (f'{hours} hour{s(hours)}, ' if hours > 0 else "")
-                   + (f'{minutes} minute{s(minutes)} and ' if minutes > 0 else "")
-                   + (f'{seconds} second{s(seconds)}' if seconds > 0 else "" ))
 
+    if years > 0: timeall.append(f'{years} year{s(years)}')
+    if days > 0: timeall.append(f'{days} day{s(days)}')
+    if hours > 0: timeall.append(f'{hours} hour{s(hours)}')
+    if minutes > 0: timeall.append(f'{minutes} minute{s(minutes)}')
+    if seconds > 0: timeall.append(f'{seconds} second{s(seconds)}')
+    
+    if len(timeall) > 2:
+        for i in range(0, len(timeall)-1):
+            result += timeall[i] + ", "
+        result += "and " + timeall[-1]
+        result = result.replace(", and", " and")
+    elif len(timeall) == 2:
+        result = timeall[0] + " and " + timeall[1]
+    elif len(timeall) == 1:
+        result = timeall[0]
+    
+    return result
 
 
 print(format_duration(1))  # "1 second"
@@ -22,11 +37,8 @@ print(format_duration(120))  # "2 minutes"
 print(format_duration(3600))  # "1 hour"
 print(format_duration(3662))  # "1 hour, 1 minute and 2 seconds" 3662
 print(format_duration(3662*1000))  # "1 hour, 1 minute and 2 seconds"
-print(format_duration(3600*24*366*366))  # "372 years, 1 day, 0 hour, 0 minute and 0 second"
-
-
-
-
+print(format_duration(3600*24*366*366))
+# "372 years, 1 day, 0 hour, 0 minute and 0 second"
 
 
 
