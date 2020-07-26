@@ -24,6 +24,9 @@ array [[]].
 '''
 
 
+import numpy as np  # used in the second function
+
+
 def snail(snail_map):
     rowstart = colstart = 0
     rowend = len(snail_map) - 1
@@ -52,11 +55,21 @@ def snail(snail_map):
     return result
 
 
+# This is one of the best practices - voted in codewars
+def snail2(array):
+    m = []
+    array = np.array(array)
+    while len(array) > 0:
+        m += array[0].tolist()
+        array = np.rot90(array[1:])
+    return m
+
+
 array = [[1, 2, 3],
          [4, 5, 6],
          [7, 8, 9]]
 expected = [1, 2, 3, 6, 9, 8, 7, 4, 5]
-print(snail(array), expected)
+print(snail2(array), expected)
 
 array = [[1, 2, 3],
          [8, 9, 4],
