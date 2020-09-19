@@ -31,10 +31,8 @@ def last_digit(lst):
         i = ls ** (i if i < 4 else i % 4 + 4)
     return i % 10
 
-# if exponent is divisible by 4 that means last
-# digit will be pow(a, 4) % 10.
-# if exponent is not divisible by 4 that means last
-# digit will be pow(a, b % 4) % 10
+# if exponent is divisible by 4, last digit will be (X**4)%10
+# if exponent is not divisible by 4, last digit will be (X**i%4)%10
 
 
 test_data = [
