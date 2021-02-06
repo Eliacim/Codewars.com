@@ -17,7 +17,7 @@ considered to be correct
 If you just press "submit", you'll get an array and the expected value!
 
 Here are some input/output pairs for you to wrap your mind around:
-
+ 
 [ 1, 2, 3, 4, 5 ] -> 6
 [ 2, 2, 3, 3 ] -> 4
 [ 6, 6, 4, 4, 1, 3 ] -> 2
